@@ -106,6 +106,7 @@
 		this.editDiv.css("height", (window.innerHeight-200)+"px");
 		this.editDiv.css("background-color", "white");
 		this.editDiv.css("z-index", "9999");
+		this.editDiv.css("overflow", "scroll");
 		this.editDiv.append("<h1>Donation List Helper</h1>");
 		var table = $("<table>");
 		table.append("<tr><td>Name</td><td>Amount</td><td>Currency</td><td>Comment</td></tr>");
