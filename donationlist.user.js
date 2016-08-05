@@ -4,10 +4,10 @@
 // @namespace       https://www.benjamin-schieder.de/
 // @description     Helper script for donation lists on twitch.tv
 // @license         Public Domain
-// @version	        0.3.0
+// @version         0.3.1
 // @include         /https://www.twitch.tv/[^/]*/
-// @require					http://bililite.com/inc/bililiteRange.js
-// @require					http://bililite.com/inc/jquery.sendkeys.js
+// @require         http://bililite.com/inc/bililiteRange.js
+// @require         http://bililite.com/inc/jquery.sendkeys.js
 // @compatible      Greasemonkey
 // ==/UserScript==
 
