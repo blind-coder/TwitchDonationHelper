@@ -54,6 +54,7 @@
 		var list = this.textarea.value.split("\n");
 		for (var i=0; i<list.length; i++){
 			var donor;
+			list[i] = list[i].replace(/\$ ?([0-9]+(\.[0-9]+)?)/, "$1$");
 			if (donor = list[i].match(this.donorRegex)){
 				retVal[donor[2]] = {amount: donor[3], currency: donor[4], comment: donor[5]};
 			}
