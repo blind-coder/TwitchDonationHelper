@@ -4,10 +4,11 @@
 // @namespace       https://www.benjamin-schieder.de/
 // @description     Helper script for donation lists on twitch.tv
 // @license         Public Domain
-// @version         0.3.1
+// @version         0.3.2
 // @include         /https://www.twitch.tv/[^/]*/
 // @require         http://bililite.com/inc/bililiteRange.js
 // @require         http://bililite.com/inc/jquery.sendkeys.js
+// @run-at          document-end
 // @compatible      Greasemonkey
 // ==/UserScript==
 
@@ -23,7 +24,7 @@
  * and click uninstall :-)
  */
 
-(function(){
+$(document).ready(function(){
 	//object constructor
 	function donationlist(){
 		console.log("donationlist: constructor start");
@@ -40,14 +41,14 @@
 				return;
 			}
 		}
-	}
+	};
 
 	donationlist.prototype.createEditButton = function(){
 		var that = this;
 		var btn = $("<span class='button'>Edit</span>");
 		btn.on("click", function(){ that.createEditWindow(); });
 		$(this.textarea).after(btn);
-	}
+	};
 
 	donationlist.prototype.parseDonors = function(){
 		var retVal = {};
@@ -55,13 +56,13 @@
 		for (var i=0; i<list.length; i++){
 			var donor;
 			list[i] = list[i].replace(/\$ ?([0-9]+(\.[0-9]+)?)/, "$1$");
-			if (donor = list[i].match(this.donorRegex)){
+			if ((donor = list[i].match(this.donorRegex))){
 				retVal[donor[2]] = {amount: donor[3], currency: donor[4], comment: donor[5]};
 			}
 		}
 
 		return retVal;
-	}
+	};
 
 	donationlist.prototype.save = function() {
 		var donors = [];
@@ -76,19 +77,19 @@
 			donor.comment = $(td[3]).find("input").val();
 
 			donors.push(donor);
-		} 
+		}
 		donors.sort(function(a, b){ return b.amount - a.amount; });
 
 		this.textarea.value = "";
-		for (var i = 0; i < donors.length; i++){
-			var d = donors[i];
-			this.textarea.value += (i+1)+". "+d.name+" "+d.amount+d.currency+" "+d.comment+"\n";
+		for (var j = 0; j < donors.length; i++){
+			var d = donors[j];
+			this.textarea.value += (j+1)+". "+d.name+" "+d.amount+d.currency+" "+d.comment+"\n";
 		}
 
 		$("#donationlist").remove();
 
 		$(this.textarea).sendkeys(" ");
-	}
+	};
 
 	donationlist.prototype.createEditWindow = function(){
 		var donors = this.parseDonors();
@@ -131,7 +132,7 @@
 		var that = this;
 		save.on("click", function(){ that.save(); });
 		this.editDiv.append(save);
-	}
+	};
 
 	setTimeout(checkIfReady, 1000);
 	function checkIfReady(){
@@ -160,4 +161,4 @@
 			}
 		});
 	}
-})();
+});
