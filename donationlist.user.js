@@ -4,7 +4,7 @@
 // @namespace       https://www.benjamin-schieder.de/
 // @description     Helper script for donation lists on twitch.tv
 // @license         Public Domain
-// @version         0.3.2
+// @version         0.3.3
 // @include         /https://www.twitch.tv/[^/]*/
 // @require         http://bililite.com/inc/bililiteRange.js
 // @require         http://bililite.com/inc/jquery.sendkeys.js
@@ -81,7 +81,7 @@ $(document).ready(function(){
 		donors.sort(function(a, b){ return b.amount - a.amount; });
 
 		this.textarea.value = "";
-		for (var j = 0; j < donors.length; i++){
+		for (var j = 0; j < donors.length; j++){
 			var d = donors[j];
 			this.textarea.value += (j+1)+". "+d.name+" "+d.amount+d.currency+" "+d.comment+"\n";
 		}
